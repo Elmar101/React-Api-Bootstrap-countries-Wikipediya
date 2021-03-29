@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
+import LogButton from './components/LogButton';
+import CountriesList from './components/CountriesList';
+import Country from './components/Country';
+import {BrowserRouter, Route,Switch} from 'react-router-dom';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const about = LogButton(About);
+  return (  
+    <>
+      <BrowserRouter>
+        <div className="container">
+          <Route path="/" component={Navbar} />
+        </div>
+        
+        <div className="container mt-2">
+          <Switch>
+            <Route path="/" component={Home} exact/>
+            <Route path="/about" component={ about } />
+            <Route path="/contact" component={ LogButton(Contact) } />
+            <Route path="/country" component={ CountriesList } />
+            <Route path="/:id" component={Country} exact/>
+          </Switch>
+        </div>
+      </BrowserRouter>
+    </>
   );
 }
 
